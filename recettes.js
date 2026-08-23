@@ -13,8 +13,6 @@
 
 
 const recettes = [
-
-
     
     // ==================================================
     // SALADE CHEVRE
@@ -325,66 +323,6 @@ const recettes = [
         ]
 
     },
-
- // ==================================================
-    // TEST IMAGE
-    // ==================================================
-
-    {
-        id: "TEST",
-
-        nom: "Testtttt",
-
-        emoji: "🥞",
-
-        categorie: "dessert",
-
-        description:
-            "Tests tests test.",
-
-        image:
-        images/IMG_2598.jpeg"
-        
-        recherche:
-            "xxxxxx",
-
-        ingredients: [
-
-            "250 g de farine",
-
-            "2 œufs",
-
-            "30 g de sucre",
-
-            "30 cl de lait",
-
-            "1 sachet de levure",
-
-            "40 g de beurre",
-
-            "Une pincée de sel"
-
-        ],
-
-        conception: [
-
-            "Mélanger la farine, le sucre et la levure.",
-
-            "Ajouter les œufs.",
-
-            "Verser progressivement le lait.",
-
-            "Ajouter le beurre fondu.",
-
-            "Laisser reposer la pâte 15 minutes.",
-
-            "Faire cuire dans une poêle chaude.",
-
-            "Retourner lorsque des bulles apparaissent."
-
-        ]
-
-    }
 
 ];
 
