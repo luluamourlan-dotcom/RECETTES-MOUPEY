@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mon carnet de recettes</title>
+
+
+    <style>
+
+        /* ==============================
+           STYLE GENERAL
+        ============================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: #f8f5f0;
+
+            color: #333;
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        header {
+            background: #7b3f00;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+
+            font-size: 36px;
+        }
+
+        header p {
+            margin: 0;
+
+            font-size: 17px;
+        }
+
+
+        /* ==============================
+           CONTENU
+        ============================== */
+
+        main {
+            max-width: 1100px;
+
+            margin: 40px auto;
+
+            padding: 0 20px;
+        }
+
+
+        /* ==============================
+           RECHERCHE
+        ============================== */
+
+        .recherche {
+            width: 100%;
+
+            padding: 16px 20px;
+
+            font-size: 17px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            margin: 20px 0;
+
+            outline: none;
+        }
+
+        .recherche:focus {
+            border-color: #7b3f00;
+        }
+
+
+        /* ==============================
+           CATEGORIES
+        ============================== */
+
+        .categories {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 30px;
+        }
+
+        .categorie {
+            border: none;
+
+            background: white;
+
+            color: #7b3f00;
+
+            padding: 10px 18px;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            box-shadow:
+                0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        .categorie:hover {
+            background: #eee4d9;
+        }
+
+        .categorie.active {
+            background: #7b3f00;
+
+            color: white;
+        }
+
+
+        /* ==============================
+           LISTE DES RECETTES
+        ============================== */
+
+        .recettes {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 25px;
+        }
+
+
+        /* ==============================
+           CARTE
+        ============================== */
+
+        .carte {
+            background: white;
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.10);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .carte:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .carte img {
+            width: 100%;
+
+            height: 190px;
+
+            object-fit: cover;
+        }
+
+        .carte-contenu {
+            padding: 18px;
+        }
+
+        .carte h3 {
+            margin: 10px 0 8px;
+
+            font-size: 20px;
+        }
+
+        .carte p {
+            margin: 0;
+
+            color: #666;
+
+            line-height: 1.4;
+        }
+
+
+        /* ==============================
+           BADGE
+        ============================== */
+
+        .badge {
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 15px;
+
+            background: #eee4d9;
+
+            color: #7b3f00;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           MESSAGE AUCUN RESULTAT
+        ============================== */
+
+        .aucun-resultat {
+            display: none;
+
+            text-align: center;
+
+            padding: 40px 20px;
+
+            color: #777;
+        }
+
+
+        /* ==============================
+           PAGE RECETTE
+        ============================== */
+
+        #page-recette {
+            display: none;
+        }
+
+
+        /* ==============================
+           PHOTO
+        ============================== */
+
+        .photo-recette {
+            width: 100%;
+
+            max-height: 500px;
+
+            object-fit: cover;
+
+            border-radius: 14px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* ==============================
+           BLOCS RECETTE
+        ============================== */
+
+        .bloc-recette {
+            background: white;
+
+            padding: 25px;
+
+            margin-top: 20px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .bloc-recette h2 {
+            color: #7b3f00;
+        }
+
+        .bloc-recette li {
+            margin-bottom: 10px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==============================
+           BOUTON
+        ============================== */
+
+        .bouton {
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding: 13px 20px;
+
+            background: #7b3f00;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        .bouton:hover {
+            background: #5c2f00;
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            main {
+                margin-top: 25px;
+            }
+
+            .recettes {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+    <h1>🍴 Mon carnet de recettes</h1>
+
+    <p>
+        Toutes mes recettes au même endroit
+    </p>
+
+</header>
+
+
+
+<!-- =========================================
+     SOMMAIRE
+========================================= -->
+
+<main id="sommaire">
+
+    <h2>
+        📖 Mes recettes
+    </h2>
+
+
+    <!-- RECHERCHE -->
+
+    <input
+        type="text"
+        id="recherche"
+        class="recherche"
+        placeholder="🔎 Rechercher une recette ou un ingrédient..."
+    >
+
+
+    <!-- CATEGORIES -->
+
+    <div
+        class="categories"
+        id="categories"
+    >
+
+    </div>
+
+
+    <!-- RECETTES -->
+
+    <div
+        class="recettes"
+        id="liste-recettes"
+    >
+
+    </div>
+
+
+    <!-- AUCUN RESULTAT -->
+
+    <div
+        id="aucun-resultat"
+        class="aucun-resultat"
+    >
+
+        😕 Aucune recette ne correspond à votre recherche.
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================
+     PAGE RECETTE
+========================================= -->
+
+<main id="page-recette">
+
+    <button
+        class="bouton"
+        onclick="retourSommaire()"
+    >
+        ← Retour au sommaire
+    </button>
+
+
+    <h1 id="recette-titre"></h1>
+
+
+    <img
+        id="recette-image"
+        class="photo-recette"
+        src=""
+        alt=""
+    >
+
+
+    <!-- INGREDIENTS -->
+
+    <section class="bloc-recette">
+
+        <h2>
+            🛒 Ingrédients
+        </h2>
+
+        <ul id="recette-ingredients">
+
+        </ul>
+
+    </section>
+
+
+    <!-- CONCEPTION -->
+
+    <section class="bloc-recette">
+
+        <h2>
+            👨‍🍳 Conception
+        </h2>
+
+        <ol id="recette-conception">
+
+        </ol>
+
+    </section>
+
+
+    <button
+        class="bouton"
+        onclick="retourSommaire()"
+    >
+        ← Retour au sommaire
+    </button>
+
+</main>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script src="recettes.js"></script>
+
+
+</body>
+
+</html>
