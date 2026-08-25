@@ -12,112 +12,216 @@
 
     <style>
 
-        /* ==============================
-           STYLE GENERAL
-        ============================== */
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+
+            --fond: #f3eee5;
+
+            --papier: #fffdf8;
+
+            --texte: #29251f;
+
+            --texte-clair: #756e63;
+
+            --accent: #7a4328;
+
+            --accent-clair: #eadbca;
+
+            --bordure: #ded5c8;
+
+        }
+
+
+        /* =====================================================
+           GENERAL
+        ===================================================== */
 
         * {
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
 
-            font-family: Arial, Helvetica, sans-serif;
-
-            background: #f8f5f0;
-
-            color: #333;
+        html {
+            scroll-behavior: smooth;
         }
 
 
-        /* ==============================
-           HEADER
-        ============================== */
+        body {
+
+            margin: 0;
+
+            background: var(--fond);
+
+            color: var(--texte);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            line-height: 1.6;
+
+        }
+
+
+        button,
+        input {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =====================================================
+           EN-TETE
+        ===================================================== */
 
         header {
-            background: #7b3f00;
+
+            background: var(--accent);
 
             color: white;
 
             text-align: center;
 
-            padding: 45px 20px;
+            padding: 45px 20px 40px;
+
         }
+
 
         header h1 {
-            margin: 0 0 10px;
 
-            font-size: 36px;
-        }
-
-        header p {
             margin: 0;
 
-            font-size: 17px;
+            font-size: clamp(30px, 5vw, 48px);
+
+            letter-spacing: 1px;
+
+            font-weight: normal;
+
         }
 
 
-        /* ==============================
-           CONTENU
-        ============================== */
+        header p {
 
-        main {
-            max-width: 1100px;
-
-            margin: 40px auto;
-
-            padding: 0 20px;
-        }
-
-
-        /* ==============================
-           RECHERCHE
-        ============================== */
-
-        .recherche {
-            width: 100%;
-
-            padding: 16px 20px;
+            margin: 8px 0 0;
 
             font-size: 17px;
 
-            border: 1px solid #ddd;
+            opacity: 0.9;
 
-            border-radius: 10px;
-
-            margin: 20px 0;
-
-            outline: none;
-        }
-
-        .recherche:focus {
-            border-color: #7b3f00;
         }
 
 
-        /* ==============================
-           CATEGORIES
-        ============================== */
+        /* =====================================================
+           CONTENU PRINCIPAL
+        ===================================================== */
 
-        .categories {
-            display: flex;
+        .conteneur {
 
-            flex-wrap: wrap;
+            width: min(1100px, 92%);
 
-            gap: 10px;
+            margin: 45px auto;
+
+        }
+
+
+        /* =====================================================
+           TITRES
+        ===================================================== */
+
+        .titre-section {
+
+            text-align: center;
 
             margin-bottom: 30px;
+
         }
 
-        .categorie {
-            border: none;
+
+        .titre-section h2 {
+
+            margin: 0;
+
+            font-size: 30px;
+
+            font-weight: normal;
+
+        }
+
+
+        .titre-section p {
+
+            margin-top: 5px;
+
+            color: var(--texte-clair);
+
+        }
+
+
+        /* =====================================================
+           RECHERCHE
+        ===================================================== */
+
+        .recherche {
+
+            width: 100%;
+
+            padding: 15px 18px;
+
+            border: 1px solid var(--bordure);
+
+            border-radius: 6px;
 
             background: white;
 
-            color: #7b3f00;
+            font-size: 17px;
 
-            padding: 10px 18px;
+            outline: none;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .recherche:focus {
+
+            border-color: var(--accent);
+
+        }
+
+
+        /* =====================================================
+           CATEGORIES
+        ===================================================== */
+
+        .categories {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .categorie {
+
+            background: transparent;
+
+            border: 1px solid var(--accent);
+
+            color: var(--accent);
+
+            padding: 8px 18px;
 
             border-radius: 20px;
 
@@ -125,225 +229,520 @@
 
             font-size: 15px;
 
-            box-shadow:
-                0 2px 5px rgba(0,0,0,0.08);
         }
 
-        .categorie:hover {
-            background: #eee4d9;
-        }
 
+        .categorie:hover,
         .categorie.active {
-            background: #7b3f00;
+
+            background: var(--accent);
 
             color: white;
+
         }
 
 
-        /* ==============================
-           LISTE DES RECETTES
-        ============================== */
+        /* =====================================================
+           GRILLE DES RECETTES
+        ===================================================== */
 
         .recettes {
+
             display: grid;
 
             grid-template-columns:
-                repeat(auto-fit, minmax(240px, 1fr));
+                repeat(auto-fill, minmax(270px, 1fr));
 
             gap: 25px;
+
         }
 
 
-        /* ==============================
-           CARTE
-        ============================== */
+        /* =====================================================
+           CARTE RECETTE
+        ===================================================== */
 
         .carte {
-            background: white;
 
-            border-radius: 14px;
+            background: var(--papier);
+
+            border: 1px solid var(--bordure);
+
+            border-radius: 5px;
 
             overflow: hidden;
-
-            box-shadow:
-                0 3px 12px rgba(0,0,0,0.10);
 
             cursor: pointer;
 
             transition:
                 transform 0.2s,
                 box-shadow 0.2s;
+
         }
+
 
         .carte:hover {
-            transform: translateY(-5px);
+
+            transform: translateY(-4px);
 
             box-shadow:
-                0 8px 20px rgba(0,0,0,0.15);
+                0 8px 25px rgba(0,0,0,0.12);
+
         }
 
+
         .carte img {
+
             width: 100%;
 
             height: 190px;
 
             object-fit: cover;
+
+            display: block;
+
         }
+
 
         .carte-contenu {
-            padding: 18px;
+
+            padding: 20px;
+
         }
 
-        .carte h3 {
-            margin: 10px 0 8px;
 
-            font-size: 20px;
+        .carte-contenu h3 {
+
+            margin: 7px 0;
+
+            font-size: 22px;
+
+            font-weight: normal;
+
         }
 
-        .carte p {
+
+        .carte-contenu p {
+
             margin: 0;
 
-            color: #666;
+            color: var(--texte-clair);
 
-            line-height: 1.4;
         }
 
-
-        /* ==============================
-           BADGE
-        ============================== */
 
         .badge {
-            display: inline-block;
 
-            padding: 5px 10px;
+            font-size: 12px;
 
-            border-radius: 15px;
+            text-transform: uppercase;
 
-            background: #eee4d9;
+            letter-spacing: 1px;
 
-            color: #7b3f00;
+            color: var(--accent);
 
-            font-size: 13px;
-
-            font-weight: bold;
         }
 
 
-        /* ==============================
-           MESSAGE AUCUN RESULTAT
-        ============================== */
+        /* =====================================================
+           AUCUN RESULTAT
+        ===================================================== */
 
         .aucun-resultat {
+
             display: none;
 
             text-align: center;
 
-            padding: 40px 20px;
+            padding: 50px;
 
-            color: #777;
+            color: var(--texte-clair);
+
         }
 
 
-        /* ==============================
+        /* =====================================================
            PAGE RECETTE
-        ============================== */
+        ===================================================== */
 
         #page-recette {
+
             display: none;
+
         }
 
 
-        /* ==============================
-           PHOTO
-        ============================== */
+        /* =====================================================
+           FICHE RECETTE
+        ===================================================== */
 
-        .photo-recette {
+        .fiche-recette {
+
+            background: var(--papier);
+
+            border: 1px solid var(--bordure);
+
+            max-width: 850px;
+
+            margin: 0 auto;
+
+            padding: clamp(25px, 5vw, 60px);
+
+            box-shadow:
+                0 5px 25px rgba(0,0,0,0.06);
+
+        }
+
+
+        /* =====================================================
+           EN-TETE DE LA RECETTE
+        ===================================================== */
+
+        .recette-date {
+
+            text-align: center;
+
+            color: var(--texte-clair);
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .recette-titre {
+
+            text-align: center;
+
+            text-transform: uppercase;
+
+            font-size: clamp(32px, 6vw, 52px);
+
+            font-weight: normal;
+
+            letter-spacing: 2px;
+
+            margin: 5px 0 20px;
+
+            color: var(--accent);
+
+        }
+
+
+        .recette-image {
+
             width: 100%;
 
-            max-height: 500px;
+            max-height: 450px;
 
             object-fit: cover;
 
-            border-radius: 14px;
+            display: block;
+
+            margin: 0 auto 35px;
+
+        }
+
+
+        /* =====================================================
+           INFORMATIONS
+        ===================================================== */
+
+        .recette-personnes {
+
+            text-align: center;
+
+            font-size: 19px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =====================================================
+           VARIANTE
+        ===================================================== */
+
+        .variante {
+
+            border-left: 4px solid var(--accent);
+
+            background: #f7f1e9;
+
+            padding: 18px 22px;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .variante-titre {
+
+            font-weight: bold;
+
+            color: var(--accent);
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .variante p {
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        .section-recette {
+
+            margin-top: 35px;
+
+        }
+
+
+        .section-recette h2 {
+
+            text-transform: uppercase;
+
+            text-align: center;
+
+            font-size: 24px;
+
+            letter-spacing: 2px;
+
+            font-weight: normal;
+
+            color: var(--accent);
 
             margin-bottom: 25px;
+
         }
 
 
-        /* ==============================
-           BLOCS RECETTE
-        ============================== */
+        /* =====================================================
+           INGREDIENTS
+        ===================================================== */
 
-        .bloc-recette {
-            background: white;
+        .categorie-ingredients {
 
-            padding: 25px;
+            margin-bottom: 25px;
 
-            margin-top: 20px;
-
-            border-radius: 14px;
-
-            box-shadow:
-                0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .bloc-recette h2 {
-            color: #7b3f00;
-        }
-
-        .bloc-recette li {
-            margin-bottom: 10px;
-
-            line-height: 1.5;
         }
 
 
-        /* ==============================
-           BOUTON
-        ============================== */
+        .categorie-ingredients h3 {
 
-        .bouton {
-            display: inline-block;
+            font-size: 18px;
 
-            margin-top: 30px;
+            font-weight: normal;
 
-            padding: 13px 20px;
+            margin: 0 0 8px;
 
-            background: #7b3f00;
+            color: var(--accent);
 
-            color: white;
+        }
 
-            border: none;
 
-            border-radius: 8px;
+        .categorie-ingredients h3::before {
+
+            content: "✦ ";
+
+        }
+
+
+        .ingredients {
+
+            list-style: none;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        .ingredients li {
+
+            margin: 4px 0;
+
+            padding-left: 20px;
+
+            position: relative;
+
+        }
+
+
+        .ingredients li::before {
+
+            content: "•";
+
+            position: absolute;
+
+            left: 3px;
+
+            color: var(--accent);
+
+        }
+
+
+        /* =====================================================
+           PREPARATION
+        ===================================================== */
+
+        .preparation p {
+
+            margin: 0 0 18px;
+
+            text-align: justify;
+
+        }
+
+
+        .fin-recette {
+
+            text-align: center;
+
+            font-size: 20px;
+
+            font-style: italic;
+
+            color: var(--accent);
+
+            margin-top: 35px;
+
+        }
+
+
+        /* =====================================================
+           BOUTON RETOUR
+        ===================================================== */
+
+        .bouton-retour {
+
+            display: block;
+
+            width: fit-content;
+
+            margin: 25px auto;
+
+            padding: 10px 20px;
+
+            background: transparent;
+
+            border: 1px solid var(--accent);
+
+            color: var(--accent);
+
+            border-radius: 4px;
 
             cursor: pointer;
 
-            font-size: 16px;
-        }
+            font-size: 15px;
 
-        .bouton:hover {
-            background: #5c2f00;
         }
 
 
-        /* ==============================
+        .bouton-retour:hover {
+
+            background: var(--accent);
+
+            color: white;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            text-align: center;
+
+            color: var(--texte-clair);
+
+            padding: 30px;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
            MOBILE
-        ============================== */
+        ===================================================== */
 
         @media (max-width: 600px) {
 
-            header h1 {
-                font-size: 28px;
+            .fiche-recette {
+
+                padding: 25px 20px;
+
             }
 
-            main {
-                margin-top: 25px;
+
+            .recette-titre {
+
+                font-size: 32px;
+
+                letter-spacing: 1px;
+
             }
 
-            .recettes {
-                grid-template-columns: 1fr;
+
+            .preparation p {
+
+                text-align: left;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           IMPRESSION
+        ===================================================== */
+
+        @media print {
+
+            body {
+
+                background: white;
+
+            }
+
+
+            header,
+            #sommaire,
+            .bouton-retour,
+            footer {
+
+                display: none !important;
+
+            }
+
+
+            #page-recette {
+
+                display: block !important;
+
+            }
+
+
+            .fiche-recette {
+
+                box-shadow: none;
+
+                border: none;
+
+                max-width: none;
+
             }
 
         }
@@ -356,31 +755,42 @@
 <body>
 
 
-<!-- =========================================
-     HEADER
-========================================= -->
+<!-- =========================================================
+     EN-TETE
+========================================================= -->
 
 <header>
 
     <h1>🍴 Mon carnet de recettes</h1>
 
     <p>
-        Toutes mes recettes au même endroit
+        Mes recettes, mes classiques et mes découvertes
     </p>
 
 </header>
 
 
 
-<!-- =========================================
+<!-- =========================================================
      SOMMAIRE
-========================================= -->
+========================================================= -->
 
-<main id="sommaire">
+<main
+    id="sommaire"
+    class="conteneur"
+>
 
-    <h2>
-        📖 Mes recettes
-    </h2>
+    <div class="titre-section">
+
+        <h2>
+            📖 Le carnet de recettes
+        </h2>
+
+        <p>
+            Retrouvez toutes mes recettes
+        </p>
+
+    </div>
 
 
     <!-- RECHERCHE -->
@@ -389,25 +799,25 @@
         type="text"
         id="recherche"
         class="recherche"
-        placeholder="🔎 Rechercher une recette ou un ingrédient..."
+        placeholder="🔎 Rechercher une recette, un ingrédient..."
     >
 
 
     <!-- CATEGORIES -->
 
     <div
-        class="categories"
         id="categories"
+        class="categories"
     >
 
     </div>
 
 
-    <!-- RECETTES -->
+    <!-- LISTE -->
 
     <div
-        class="recettes"
         id="liste-recettes"
+        class="recettes"
     >
 
     </div>
@@ -420,7 +830,7 @@
         class="aucun-resultat"
     >
 
-        😕 Aucune recette ne correspond à votre recherche.
+        Aucune recette ne correspond à votre recherche.
 
     </div>
 
@@ -428,75 +838,170 @@
 
 
 
-<!-- =========================================
+<!-- =========================================================
      PAGE RECETTE
-========================================= -->
+========================================================= -->
 
-<main id="page-recette">
-
-    <button
-        class="bouton"
-        onclick="retourSommaire()"
-    >
-        ← Retour au sommaire
-    </button>
-
-
-    <h1 id="recette-titre"></h1>
-
-
-    <img
-        id="recette-image"
-        class="photo-recette"
-        src=""
-        alt=""
-    >
-
-
-    <!-- INGREDIENTS -->
-
-    <section class="bloc-recette">
-
-        <h2>
-            🛒 Ingrédients
-        </h2>
-
-        <ul id="recette-ingredients">
-
-        </ul>
-
-    </section>
-
-
-    <!-- CONCEPTION -->
-
-    <section class="bloc-recette">
-
-        <h2>
-            👨‍🍳 Conception
-        </h2>
-
-        <ol id="recette-conception">
-
-        </ol>
-
-    </section>
+<main
+    id="page-recette"
+    class="conteneur"
+>
 
 
     <button
-        class="bouton"
+        class="bouton-retour"
         onclick="retourSommaire()"
     >
+
         ← Retour au sommaire
+
     </button>
+
+
+    <article class="fiche-recette">
+
+
+        <!-- DATE -->
+
+        <div
+            id="recette-date"
+            class="recette-date"
+        >
+        </div>
+
+
+        <!-- TITRE -->
+
+        <h1
+            id="recette-titre"
+            class="recette-titre"
+        >
+        </h1>
+
+
+        <!-- PHOTO -->
+
+        <img
+            id="recette-image"
+            class="recette-image"
+            src=""
+            alt=""
+        >
+
+
+        <!-- NOMBRE DE PERSONNES -->
+
+        <div
+            id="recette-personnes"
+            class="recette-personnes"
+        >
+        </div>
+
+
+        <!-- VARIANTE -->
+
+        <div
+            id="recette-variante"
+            class="variante"
+            style="display: none;"
+        >
+
+            <div
+                id="variante-titre"
+                class="variante-titre"
+            >
+            </div>
+
+            <p
+                id="variante-texte"
+            >
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             INGREDIENTS
+        ================================================== -->
+
+        <section class="section-recette">
+
+            <h2>
+                Ingrédients
+            </h2>
+
+
+            <div
+                id="recette-ingredients"
+            >
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PREPARATION
+        ================================================== -->
+
+        <section
+            class="section-recette"
+        >
+
+            <h2>
+                Préparation
+            </h2>
+
+
+            <div
+                id="recette-preparation"
+                class="preparation"
+            >
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FIN
+        ================================================== -->
+
+        <div
+            id="recette-fin"
+            class="fin-recette"
+        >
+        </div>
+
+
+    </article>
+
+
+    <button
+        class="bouton-retour"
+        onclick="retourSommaire()"
+    >
+
+        ← Retour au sommaire
+
+    </button>
+
 
 </main>
 
 
 
-<!-- =========================================
+<footer>
+
+    Mon carnet de recettes
+
+</footer>
+
+
+
+<!-- =========================================================
      JAVASCRIPT
-========================================= -->
+========================================================= -->
 
 <script src="recettes.js"></script>
 
