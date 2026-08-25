@@ -39,7 +39,7 @@ const recettes = [
 
 
         image:
-            "images/Plats/couscous.jpg",
+           "images/Plats/couscous.jpg",
 
 
         recherche:
