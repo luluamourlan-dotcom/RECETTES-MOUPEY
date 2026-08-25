@@ -1,6 +1,26 @@
+// ============================================================
+// MON CARNET DE RECETTES
+// ============================================================
+//
+// Pour ajouter une recette :
+// copiez un bloc { ... } et modifiez son contenu.
+//
+// Catégories possibles :
+// "entree"
+// "plat"
+// "dessert"
+// ============================================================
+
+
 const recettes = [
 
+
+    // ========================================================
+    // COUSCOUS
+    // ========================================================
+
     {
+
         id: "couscous",
 
         nom: "Couscous",
@@ -9,36 +29,47 @@ const recettes = [
 
         categorie: "plat",
 
+        date: "Juin 2026",
+
         personnes: "6 personnes",
 
+
         description:
-            "Un couscous généreux avec poulet, merguez, légumes et épices.",
+            "Couscous aux poulet, merguez, chorizo et légumes.",
+
 
         image:
             "images/plats/couscous.jpg",
 
-        recherche:
-            "couscous poulet merguez chorizo légumes carottes navets poireaux courgettes pois chiches semoule épices",
 
-        // ==========================================
+        recherche:
+            "couscous poulet merguez chorizo légumes carottes navets poireaux courgettes citrouille céleri tomates pois chiches semoule raisins épices harissa",
+
+
+        // ====================================================
         // VARIANTE
-        // ==========================================
+        // ====================================================
 
         variante: {
-            titre: "Variante andalouse",
+
+            titre:
+                "Variante andalouse",
 
             texte:
                 "On remplace les pilons de poulet par 1 kg de pollo de pincho que l’on fait cuire à part dans une poêle."
+
         },
 
 
-        // ==========================================
+        // ====================================================
         // INGREDIENTS
-        // ==========================================
+        // ====================================================
 
         ingredients: [
 
+
             {
+
                 categorie: "Viandes",
 
                 items: [
@@ -50,10 +81,12 @@ const recettes = [
                     "1 morceau de chorizo"
 
                 ]
+
             },
 
 
             {
+
                 categorie: "Légumes",
 
                 items: [
@@ -83,10 +116,12 @@ const recettes = [
                     "1 bol de raisins secs"
 
                 ]
+
             },
 
 
             {
+
                 categorie: "Épices",
 
                 items: [
@@ -114,14 +149,15 @@ const recettes = [
                     "Harissa"
 
                 ]
+
             }
 
         ],
 
 
-        // ==========================================
+        // ====================================================
         // PREPARATION
-        // ==========================================
+        // ====================================================
 
         preparation: [
 
@@ -157,6 +193,738 @@ const recettes = [
 
         ]
 
+
     }
 
+
 ];
+
+
+
+// ============================================================
+// VARIABLES
+// ============================================================
+
+
+let categorieActuelle = "toutes";
+
+
+
+// ============================================================
+// CATEGORIES
+// ============================================================
+
+
+function afficherCategories() {
+
+
+    const conteneur =
+        document.getElementById(
+            "categories"
+        );
+
+
+    conteneur.innerHTML = "";
+
+
+    const categories = [
+
+
+        {
+            id: "toutes",
+
+            nom: "Toutes"
+
+        },
+
+
+        {
+            id: "entree",
+
+            nom: "🥗 Entrées"
+
+        },
+
+
+        {
+            id: "plat",
+
+            nom: "🍝 Plats"
+
+        },
+
+
+        {
+            id: "dessert",
+
+            nom: "🍰 Desserts"
+
+        }
+
+    ];
+
+
+    categories.forEach(
+        function(categorie) {
+
+
+            const bouton =
+                document.createElement(
+                    "button"
+                );
+
+
+            bouton.className =
+                "categorie";
+
+
+            bouton.textContent =
+                categorie.nom;
+
+
+            if (
+                categorie.id ===
+                categorieActuelle
+            ) {
+
+                bouton.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            bouton.addEventListener(
+                "click",
+                function() {
+
+
+                    categorieActuelle =
+                        categorie.id;
+
+
+                    afficherCategories();
+
+                    afficherRecettes();
+
+                }
+            );
+
+
+            conteneur.appendChild(
+                bouton
+            );
+
+        }
+    );
+
+}
+
+
+
+// ============================================================
+// AFFICHER LES RECETTES
+// ============================================================
+
+
+function afficherRecettes() {
+
+
+    const liste =
+        document.getElementById(
+            "liste-recettes"
+        );
+
+
+    const recherche =
+        document
+            .getElementById(
+                "recherche"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    liste.innerHTML = "";
+
+
+    let nombreResultats = 0;
+
+
+    recettes.forEach(
+        function(recette) {
+
+
+            // -----------------------------------------------
+            // CATEGORIE
+            // -----------------------------------------------
+
+            const bonneCategorie =
+
+                categorieActuelle ===
+                "toutes"
+
+                ||
+
+                recette.categorie ===
+                categorieActuelle;
+
+
+            // -----------------------------------------------
+            // RECHERCHE
+            // -----------------------------------------------
+
+            const texteRecherche = (
+
+                recette.nom
+                + " "
+                + recette.recherche
+                + " "
+                + recette.description
+
+            ).toLowerCase();
+
+
+            const bonneRecherche =
+
+                texteRecherche.includes(
+                    recherche
+                );
+
+
+            // -----------------------------------------------
+            // AFFICHAGE
+            // -----------------------------------------------
+
+            if (
+                bonneCategorie
+                &&
+                bonneRecherche
+            ) {
+
+
+                nombreResultats++;
+
+
+                const carte =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                carte.className =
+                    "carte";
+
+
+                carte.innerHTML = `
+
+                    <img
+                        src="${recette.image}"
+                        alt="${recette.nom}"
+                    >
+
+                    <div class="carte-contenu">
+
+                        <div class="badge">
+
+                            ${nomCategorie(
+                                recette.categorie
+                            )}
+
+                        </div>
+
+                        <h3>
+
+                            ${recette.emoji}
+                            ${recette.nom}
+
+                        </h3>
+
+                        <p>
+
+                            ${recette.description}
+
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                carte.addEventListener(
+                    "click",
+                    function() {
+
+                        afficherRecette(
+                            recette.id
+                        );
+
+                    }
+                );
+
+
+                liste.appendChild(
+                    carte
+                );
+
+            }
+
+        }
+    );
+
+
+    // -----------------------------------------------
+    // AUCUN RESULTAT
+    // -----------------------------------------------
+
+    const aucun =
+        document.getElementById(
+            "aucun-resultat"
+        );
+
+
+    if (
+        nombreResultats === 0
+    ) {
+
+        aucun.style.display =
+            "block";
+
+    }
+
+    else {
+
+        aucun.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+// ============================================================
+// NOM CATEGORIE
+// ============================================================
+
+
+function nomCategorie(
+    categorie
+) {
+
+
+    if (
+        categorie === "entree"
+    ) {
+
+        return "Entrée";
+
+    }
+
+
+    if (
+        categorie === "plat"
+    ) {
+
+        return "Plat";
+
+    }
+
+
+    if (
+        categorie === "dessert"
+    ) {
+
+        return "Dessert";
+
+    }
+
+
+    return categorie;
+
+}
+
+
+
+// ============================================================
+// AFFICHER UNE RECETTE
+// ============================================================
+
+
+function afficherRecette(
+    id
+) {
+
+
+    const recette =
+        recettes.find(
+            function(recette) {
+
+                return recette.id === id;
+
+            }
+        );
+
+
+    if (!recette) {
+
+        return;
+
+    }
+
+
+    // -----------------------------------------------
+    // CACHER LE SOMMAIRE
+    // -----------------------------------------------
+
+    document
+        .getElementById(
+            "sommaire"
+        )
+        .style.display =
+        "none";
+
+
+    // -----------------------------------------------
+    // AFFICHER LA RECETTE
+    // -----------------------------------------------
+
+    document
+        .getElementById(
+            "page-recette"
+        )
+        .style.display =
+        "block";
+
+
+    // -----------------------------------------------
+    // DATE
+    // -----------------------------------------------
+
+    document
+        .getElementById(
+            "recette-date"
+        )
+        .textContent =
+        recette.date || "";
+
+
+    // -----------------------------------------------
+    // TITRE
+    // -----------------------------------------------
+
+    document
+        .getElementById(
+            "recette-titre"
+        )
+        .textContent =
+
+        recette.emoji
+        + " "
+        + recette.nom;
+
+
+    // -----------------------------------------------
+    // IMAGE
+    // -----------------------------------------------
+
+    const image =
+        document.getElementById(
+            "recette-image"
+        );
+
+
+    image.src =
+        recette.image;
+
+
+    image.alt =
+        recette.nom;
+
+
+    // -----------------------------------------------
+    // PERSONNES
+    // -----------------------------------------------
+
+    const personnes =
+        document.getElementById(
+            "recette-personnes"
+        );
+
+
+    if (
+        recette.personnes
+    ) {
+
+        personnes.textContent =
+            "Ingrédients pour "
+            + recette.personnes
+            + " :";
+
+    }
+
+    else {
+
+        personnes.textContent =
+            "";
+
+    }
+
+
+    // -----------------------------------------------
+    // VARIANTE
+    // -----------------------------------------------
+
+    const variante =
+        document.getElementById(
+            "recette-variante"
+        );
+
+
+    if (
+        recette.variante
+    ) {
+
+
+        variante.style.display =
+            "block";
+
+
+        document
+            .getElementById(
+                "variante-titre"
+            )
+            .textContent =
+            recette.variante.titre
+            + " :";
+
+
+        document
+            .getElementById(
+                "variante-texte"
+            )
+            .textContent =
+            recette.variante.texte;
+
+    }
+
+    else {
+
+
+        variante.style.display =
+            "none";
+
+    }
+
+
+    // -----------------------------------------------
+    // INGREDIENTS
+    // -----------------------------------------------
+
+    const ingredients =
+        document.getElementById(
+            "recette-ingredients"
+        );
+
+
+    ingredients.innerHTML = "";
+
+
+    recette.ingredients.forEach(
+        function(groupe) {
+
+
+            const bloc =
+                document.createElement(
+                    "div"
+                );
+
+
+            bloc.className =
+                "categorie-ingredients";
+
+
+            const titre =
+                document.createElement(
+                    "h3"
+                );
+
+
+            titre.textContent =
+                groupe.categorie;
+
+
+            bloc.appendChild(
+                titre
+            );
+
+
+            const liste =
+                document.createElement(
+                    "ul"
+                );
+
+
+            liste.className =
+                "ingredients";
+
+
+            groupe.items.forEach(
+                function(ingredient) {
+
+
+                    const item =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    item.textContent =
+                        ingredient;
+
+
+                    liste.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+
+            bloc.appendChild(
+                liste
+            );
+
+
+            ingredients.appendChild(
+                bloc
+            );
+
+        }
+    );
+
+
+    // -----------------------------------------------
+    // PREPARATION
+    // -----------------------------------------------
+
+    const preparation =
+        document.getElementById(
+            "recette-preparation"
+        );
+
+
+    preparation.innerHTML = "";
+
+
+    recette.preparation.forEach(
+        function(paragraphe) {
+
+
+            const p =
+                document.createElement(
+                    "p"
+                );
+
+
+            p.textContent =
+                paragraphe;
+
+
+            preparation.appendChild(
+                p
+            );
+
+        }
+    );
+
+
+    // -----------------------------------------------
+    // FIN DE RECETTE
+    // -----------------------------------------------
+
+    const fin =
+        document.getElementById(
+            "recette-fin"
+        );
+
+
+    fin.textContent =
+        "";
+
+
+    // -----------------------------------------------
+    // HAUT DE PAGE
+    // -----------------------------------------------
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+
+// ============================================================
+// RETOUR AU SOMMAIRE
+// ============================================================
+
+
+function retourSommaire() {
+
+
+    document
+        .getElementById(
+            "page-recette"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "sommaire"
+        )
+        .style.display =
+        "block";
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+
+// ============================================================
+// RECHERCHE
+// ============================================================
+
+
+document
+    .getElementById(
+        "recherche"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            afficherRecettes();
+
+        }
+    );
+
+
+
+// ============================================================
+// DEMARRAGE
+// ============================================================
+
+
+afficherCategories();
+
+afficherRecettes();
