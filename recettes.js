@@ -241,7 +241,6 @@ const recettes = [
 
             texte:
                 "xyz"
-
         },
 
 
@@ -250,27 +249,19 @@ const recettes = [
         // ====================================================
 
         ingredients: [
-
-
             {
-
-                categorie: "Appareil",
+            categorie: "Appareil",
 
                 items: [
 
                     "chocolat",
-
                     "lait",
-
                     "beurre"
-
                 ]
-
             },
 
 
             {
-
                 categorie: "Pate",
 
                 items: [
