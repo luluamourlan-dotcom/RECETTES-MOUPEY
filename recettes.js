@@ -24,7 +24,7 @@ const recettes = [
         categorie: "plat",
 
         // Image affichée dans le sommaire
-        image: "images/couscous.jpg",
+        image: "TEST/dossier sans titre/PHOTOS/Plat/Couscous.jpg",
 
         // Scans de la recette
         scans: [
