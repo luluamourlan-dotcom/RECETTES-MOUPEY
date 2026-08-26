@@ -374,20 +374,78 @@ function afficherRecette(id) {
         .style.display = "block";
 
 
-    // Afficher le titre
+   // -----------------------------------------------
+// TITRE
+// -----------------------------------------------
 
-    document
-        .getElementById("recette-titre")
-        .textContent = recette.nom;
+document
+    .getElementById("recette-titre")
+    .textContent = recette.nom;
 
 
-    // Conteneur des scans
 
-    const conteneurScans =
-        document.getElementById(
-            "recette-scans"
+// -----------------------------------------------
+// PHOTO
+// -----------------------------------------------
+
+const photo =
+    document.getElementById(
+        "recette-photo"
+    );
+
+
+photo.src =
+    recette.image;
+
+
+photo.alt =
+    recette.nom;
+
+
+
+// -----------------------------------------------
+// SCANS
+// -----------------------------------------------
+
+const conteneurScans =
+    document.getElementById(
+        "recette-scans"
+    );
+
+
+conteneurScans.innerHTML = "";
+
+
+
+recette.scans.forEach(
+    function(scan, index) {
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.className =
+            "scan";
+
+
+        image.src =
+            scan;
+
+
+        image.alt =
+            recette.nom
+            + " - page "
+            + (index + 1);
+
+
+        conteneurScans.appendChild(
+            image
         );
 
+    }
+);
 
     conteneurScans.innerHTML = "";
 
