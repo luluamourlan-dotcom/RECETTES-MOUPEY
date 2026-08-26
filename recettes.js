@@ -28,8 +28,7 @@ const recettes = [
 
         // Scans de la recette
         scans: [
-            "scan/couscous/page-1.jpg",
-            "scan/couscous/page-2.jpg"
+            "TEST/dossier sans titre/SCANS/Plat/Couscous.jpg"
         ]
     },
 
