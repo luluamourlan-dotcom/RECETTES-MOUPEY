@@ -6,6 +6,7 @@
 //
 // scan/   = scans des recettes papier
 //
+// Catégories actuelles = entree, plat, dessert
 // ============================================================
 
 
@@ -24,44 +25,61 @@ const recettes = [
         categorie: "plat",
 
         // Image affichée dans le sommaire
-        image: "TEST/dossier sans titre/PHOTOS/Plat/Couscous.jpg",
+        image: "CHARGEMENT/PHOTOS/Plat/Couscous.jpg",
 
         // Scans de la recette
         scans: [
-            "TEST/dossier sans titre/SCANS/Plat/Couscous.jpg"
+            "CHARGEMENT/SCANS/Plat/Couscous.jpg"
         ]
     },
 
 
     // ========================================================
-    // SALADE DE CHEVRE
+    // CAKE POMME COINGS
     // ========================================================
 
     {
-        id: "salade-chevre",
+        id: "cake-pomme-coings",
 
-        nom: "Salade de chèvre chaud",
+        nom: "Cake Pomme Coings",
 
-        categorie: "entree",
+        categorie: "dessert",
 
-        image: "images/salade-chevre.jpg",
+        image: "CHARGEMENT/PHOTOS/dessert/cake coings.jpg",
 
         scans: [
-            "scan/salade-chevre/page-1.jpg"
+            "CHARGEMENT/SCANS/dessert/Cake pomme coings.jpg"
         ]
     },
 
-
     // ========================================================
-    // LASAGNES
+    // CANNELES
     // ========================================================
 
     {
-        id: "lasagnes",
+        id: "canneles",
 
-        nom: "Lasagnes",
+        nom: "Canneles",
 
-        categorie: "plat",
+        categorie: "dessert",
+
+        image: "CHARGEMENT/PHOTOS/dessert/Canneles.jpg",
+
+        scans: [
+            "CHARGEMENT/SCANS/dessert/Canneles.jpg"
+        ]
+    },
+
+    // ========================================================
+    // TEST ENTREE
+    // ========================================================
+
+    {
+        id: "entree",
+
+        nom: "Entree",
+
+        categorie: "entree",
 
         image: "images/lasagnes.jpg",
 
